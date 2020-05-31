@@ -4,11 +4,11 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-layout',
   template: `
-    <h1>Dashboard Layout</h1>
+    <h1 class="title">Dashboard Layout</h1>
     <p>
       <a routerLink="home" >Home</a> |
       <a routerLink="admin"> Admin </a>
-      <button (click)="logout()"> Logout</button>
+      <button class="button" (click)="logout()"> Logout</button>
     </p>
     <router-outlet></router-outlet>
   `,
