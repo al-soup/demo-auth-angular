@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { dashboardRoutes } from './dashboard.routes';
 import { AuthGuard } from '../guards/auth-guard.service';
 import { RoleGuard } from '../guards/role-guard.service';
+import { MatButtonModule } from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -18,6 +20,8 @@ import { RoleGuard } from '../guards/role-guard.service';
   ],
   imports: [
     CommonModule,
+    MatButtonModule,
+    MatCardModule,
     RouterModule.forChild(dashboardRoutes),
   ],
   providers: [

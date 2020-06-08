@@ -6,6 +6,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { DashboardModule } from './dashboard/dashboard.module';
 import { RouterModule } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +21,11 @@ import { APP_ROUTES } from './app.routes';
   imports: [
     BrowserModule,
     DashboardModule,
-    RouterModule.forRoot(APP_ROUTES)
+    MatButtonModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(APP_ROUTES),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [
