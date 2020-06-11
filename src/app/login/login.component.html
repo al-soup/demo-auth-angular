@@ -1,11 +1,11 @@
 <div class="container">
   <mat-card class="login-card">
       <div>
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <input formControlName="email" placeholder="Email">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <input formControlName="username" placeholder="Email / Username">
       <input formControlName="password" type="password" placeholder="Password">
 
-      <button mat-raised-button type="submit" class="btn" color="primary">Login</button>
+      <button mat-raised-button type="submit" class="btn" color="primary" [disabled]="loginForm.invalid">Login</button>
     </form>
     <!-- <button mat-raised-button  class="btn" color="primary" (click)="loginAdmin()">Admin User Log in </button> -->
     </div>
