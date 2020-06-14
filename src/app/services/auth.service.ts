@@ -53,7 +53,7 @@ export class AuthService {
     headers.set('Content-Type', 'application/json');
     headers.set('Access-Control-Allow-Origin', 'http:localhost:3000');
 
-    this.httpClient.post(`https://localhost:3000/api/login`, { ...user }).subscribe(
+    this.httpClient.post(`${this.api}/auth/login`, { ...user }).subscribe(
     // this.httpClient.post(`api/login`, { ...user }).subscribe(
       event => console.log(event),
       error => console.log(error)
