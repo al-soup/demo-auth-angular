@@ -13,7 +13,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private message: string;
   private api = environment.API;
 
   constructor(
@@ -30,7 +29,6 @@ export class AuthService {
 
   /**
    * check for expiration and if token is still existing or not
-   * @return {boolean}
    */
   isAuthenticated(): boolean {
     return localStorage.getItem('token') != null && !this.isTokenExpired();
@@ -48,19 +46,16 @@ export class AuthService {
   }
 
   login(user: any): void {
-    console.log(user);
-    const headers = new HttpHeaders();
-    headers.set('Content-Type', 'application/json');
-    headers.set('Access-Control-Allow-Origin', 'http:localhost:3000');
 
     this.httpClient.post(`${this.api}/auth/login`, { ...user }).subscribe(
-    // this.httpClient.post(`api/login`, { ...user }).subscribe(
-      event => console.log(event),
+      (event: { access_token: string }) => {
+        localStorage.setItem('token', event.access_token);
+        this.router.navigate(['/dashboard']);
+      },
       error => console.log(error)
     );
     // localStorage.setItem('token', `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MzMyNzM5NjksImV4cCI6MTU2NDgxMDAwNSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoiVGVzdCBHdWFyZCIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20ifQ.GA0Y9gYIjmx1jLwuRHuBgZ8m6o-NgkD84nO0ym68CWo`);
 
-    // this.router.navigate(['/dashboard']);
   }
 
   /**
