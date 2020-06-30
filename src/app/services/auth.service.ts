@@ -1,10 +1,8 @@
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {Observable, pipe, throwError} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
 import decode from 'jwt-decode';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 
@@ -30,9 +28,20 @@ export class AuthService {
   /**
    * check for expiration and if token is still existing or not
    */
-  // TODO: Check if token is valid (expiration)
-  isAuthenticated(): boolean {
-    return localStorage.getItem('token') != null && !this.isTokenExpired();
+  async isAuthenticated() {
+    // return localStorage.getItem('token') != null && !this.isTokenExpired();
+    const isLoggedIn = false;
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return isLoggedIn;
+    }
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', `Bearer ${token}111`);
+    const req: any = await this.httpClient
+      .get(`${this.api}/auth/isloggedin`, { headers })
+      .toPromise()
+      .catch(e => console.error('AuthErr', e));
+    return req?.isloggedin || isLoggedIn;
   }
 
   // simulate jwt token is valid
@@ -55,8 +64,6 @@ export class AuthService {
       },
       error => console.error(error)
     );
-    // localStorage.setItem('token', `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MzMyNzM5NjksImV4cCI6MTU2NDgxMDAwNSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoiVGVzdCBHdWFyZCIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20ifQ.GA0Y9gYIjmx1jLwuRHuBgZ8m6o-NgkD84nO0ym68CWo`);
-
   }
 
   /**
