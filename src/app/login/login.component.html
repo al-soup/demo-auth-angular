@@ -1,13 +1,16 @@
 <div class="container">
   <mat-card class="login-card">
-      <div>
+    <div>
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <input formControlName="username" placeholder="Email / Username">
-      <input formControlName="password" type="password" placeholder="Password">
+        <input formControlName="username" placeholder="Email / Username">
+        <input formControlName="password" type="password" placeholder="Password">
 
-      <button mat-raised-button type="submit" class="btn" color="primary" [disabled]="loginForm.invalid">Login</button>
-    </form>
-    <!-- <button mat-raised-button  class="btn" color="primary" (click)="loginAdmin()">Admin User Log in </button> -->
+        <button mat-raised-button type="submit" class="btn" color="primary"
+          [disabled]="loginForm.invalid">Login</button>
+      </form>
+      <button mat-raised-button type="submit" class="btn" color="primary">
+        <a href="http://127.0.0.1:3000/api/auth/twitter">Login with Twitter</a>
+      </button>
     </div>
   </mat-card>
 </div>

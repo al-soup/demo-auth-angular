@@ -29,30 +29,18 @@ export class AuthService {
    * check for expiration and if token is still existing or not
    */
   async isAuthenticated() {
-    // return localStorage.getItem('token') != null && !this.isTokenExpired();
     const isLoggedIn = false;
     const token = localStorage.getItem('token');
     if (!token) {
       return isLoggedIn;
     }
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}111`);
+    headers = headers.set('Authorization', `Bearer ${token}`);
     const req: any = await this.httpClient
       .get(`${this.api}/auth/isloggedin`, { headers })
       .toPromise()
       .catch(e => console.error('AuthErr', e));
     return req?.isloggedin || isLoggedIn;
-  }
-
-  // simulate jwt token is valid
-  // https://github.com/theo4u/angular4-auth/blob/master/src/app/helpers/jwt-helper.ts
-  isTokenExpired(): boolean {
-    return false;
-  }
-
-  loginAdmin(): void {
-    localStorage.setItem('token', `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MzMyNzM5NjksImV4cCI6MTU2NDgxMDAwNSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoiVGVzdCBHdWFyZCIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJyb2xlIjoiQWRtaW4ifQ.rEkg53_IeCLzGHlmaHTEO8KF5BNfl6NEJ8w-VEq2PkE`);
-    this.router.navigate(['/dashboard']);
   }
 
   login(user: any): void {

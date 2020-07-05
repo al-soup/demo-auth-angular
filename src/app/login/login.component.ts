@@ -8,7 +8,6 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  //  https://www.digitalocean.com/community/tutorials/angular-reactive-forms-introduction
   loginForm: FormGroup;
 
   constructor(
@@ -25,10 +24,6 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     this.authService.login(this.loginForm.value);
-  }
-
-  loginAdmin() {
-    this.authService.loginAdmin();
   }
 
 }
